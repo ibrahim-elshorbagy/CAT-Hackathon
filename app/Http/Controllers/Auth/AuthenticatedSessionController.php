@@ -4,35 +4,66 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): Response
+
+
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+            // Attempt to authenticate using the LoginRequest
+            $request->authenticate();
 
-        return response()->noContent();
+            // If authentication passes, proceed to token creation
+            $user = $request->user();
+            $user->tokens()->delete(); // Delete existing tokens if any
+
+            // Create a new token
+            $token = $user->createToken('API TOKEN');
+
+            return response()->json([
+                'user' => $user,
+                'access_token' => $token->plainTextToken,
+                'token_type' => 'Bearer',
+            ]);
+        try {
+        } catch (AuthenticationException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid credentials.',
+            ], 401);
+
+        } catch (\Throwable $th) {
+            // Handle other unexpected errors
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ], 500);
+        }
     }
+
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): Response
+    public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        // Ensure user is authenticated
+        if (!Auth::check()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
 
-        $request->session()->invalidate();
+        // Revoke all tokens issued to the current user
+        $request->user()->currentAccessToken()->delete();
 
-        $request->session()->regenerateToken();
-
-        return response()->noContent();
+        return response()->json([
+            'message' => 'Logged out successfully.'
+        ]);
     }
 }
