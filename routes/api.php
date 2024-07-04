@@ -15,23 +15,29 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::middleware(['guest','api'])->group(function () {
 
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+    Route::post('/verify', [RegisteredUserController::class, 'verify']);
+    Route::post('/resend-code', [RegisteredUserController::class, 'resendCode']);
+
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
     Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
     Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('testo',function(){
+       return response()->json(['message' => 'hello']);
 
-    Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-                    ->middleware(['signed', 'throttle:6,1'])
-                    ->name('verification.verify');
+    });
+    // Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+    //                 ->middleware(['signed', 'throttle:6,1'])
+    //                 ->name('verification.verify');
 
-    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware(['throttle:6,1'])
-                ->name('verification.send');
+    // Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    //             ->middleware(['throttle:6,1'])
+    //             ->name('verification.send');
 });

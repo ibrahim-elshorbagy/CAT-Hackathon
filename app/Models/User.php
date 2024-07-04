@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'code',
+        'expire_at',
     ];
 
     /**
@@ -45,5 +48,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function generateRegisterCode()
+    {
+        $this->timestamps = false;
+        $this->code = rand(1000, 9999);
+        $this->expire_at = now()->addMinutes(60);
+        $this->save();
     }
 }
