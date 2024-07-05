@@ -1,10 +1,32 @@
 # Laravel API
 
-## Overview
+## Guest Routes
+
+| URL                        | Accepts                            |
+|----------------------------|------------------------------------|
+| `/api/register`            | `name`, `phone`, `password`        |
+| `/api/verify`              | `phone`, `code`                    |
+| `/api/resend-code`         | `phone`                            |
+| `/api/login`               | `phone`, `password`                |
+| `/api/forgot-password`     | `phone`                            |
+| `/api/forgot-password-resend-code` | `phone`                            |
+| `/api/verify-reset-code`   | `phone`, `ForgetPasswordCode`      |
+| `/api/forgot-reset-password` | `phone`, `ForgetPasswordCode`, `password` |
+
+## Auth Routes
+remeber to use Token here
+| URL           | Accepts            |
+|---------------|--------------------|
+| `/api/logout` | -                  |
+| `/api/testo`  | -                  |
 
 
 ## Features
 
+- Full authentication system with mobile registration
+- Phone number verification via SMS
+- Password reset functionality with verification code
+- Token-based authentication using Laravel Sanctum
 
 ## Libraries Used
 - Laravel 11
