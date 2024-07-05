@@ -49,8 +49,8 @@ class RegisteredUserController extends Controller
 
             $user->generateRegisterCode();
 
-
-            // $this->verifySMS($user->phone, $user->code); -------------------------------------------------> uncomment this line to start send SMS verification code
+            //$this->verifySMS($user->phone, $user->code); //-------------------------------------------------> uncomment this line to start send SMS verification code
+            Log::info('Your verification code is.' .  $user->code);
 
             Auth::login($user);
 
@@ -66,12 +66,16 @@ class RegisteredUserController extends Controller
         }
     }
 
+
+
+
     /**
      * Send SMS verification code to the user.
      */
     public function verifySMS($phone, $code)
     {
-        $basic = new \Vonage\Client\Credentials\Basic(env('VONAGE_API_KEY'), env('VONAGE_API_SECRET'));
+        $basic = new \Vonage\Client\Credentials\Basic('c6203c09', 'sLLL7LM5ht0CysQH');
+
         $client = new \Vonage\Client($basic);
 
         $response = $client->sms()->send(
@@ -79,6 +83,10 @@ class RegisteredUserController extends Controller
         );
 
     }
+
+
+
+
 
     /**
      * Verify the user's phone number.
@@ -128,6 +136,14 @@ class RegisteredUserController extends Controller
 
     }
 
+
+
+
+
+    /**
+     * Verify the Resend Code.
+     */
+
     public function resendCode(Request $request)
     {
 
@@ -156,7 +172,8 @@ class RegisteredUserController extends Controller
         // Generate a new verification code
         $user->generateRegisterCode();
 
-        // $this->verifySMS($user->phone, $user->code);  -------------------------------------------------> uncomment this line to start send SMS verification code
+        //$this->verifySMS($user->phone, $user->code);  //-------------------------------------------------> uncomment this line to start send SMS verification code
+        Log::info('Your verification code is.' .  $user->code);
 
         return response()->json([
             'status' => true,

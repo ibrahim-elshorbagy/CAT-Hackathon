@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->datetime('expire_at')->nullable();
             $table->string('password');
+            $table->string('ForgetPasswordCode')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

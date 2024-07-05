@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phone',
         'code',
         'expire_at',
+        'ForgetPasswordCode',
     ];
 
     /**
@@ -55,6 +56,12 @@ class User extends Authenticatable
         $this->timestamps = false;
         $this->code = rand(1000, 9999);
         $this->expire_at = now()->addMinutes(60);
+        $this->save();
+    }
+    
+    public function generateForgetPasswordCode()
+    {
+        $this->ForgetPasswordCode = rand(1000, 9999);
         $this->save();
     }
 }
