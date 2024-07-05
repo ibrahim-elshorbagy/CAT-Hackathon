@@ -24,12 +24,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         try {
-                    $request->merge([
-            'phone' => trim($request->phone),
-        ]);
 
-        // Log the phone number input for debugging
-            Log::info('Phone input: ' . $request->phone);
             // Validate the incoming request data
             $validateUser = Validator::make($request->all(), [
                 'name' => ['required', 'string', 'max:255'],

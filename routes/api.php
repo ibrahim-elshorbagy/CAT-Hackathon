@@ -8,9 +8,6 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-// header('Access-Control-Allow-Origin:  *');
-// header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
-// header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 
 Route::middleware(['guest','api'])->group(function () {
