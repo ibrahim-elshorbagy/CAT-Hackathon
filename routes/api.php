@@ -7,6 +7,21 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/opt', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('config:cache');
+    Artisan::call('route:cache');
+    Artisan::call('view:cache');
+    Artisan::call('event:cache');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('event:clear');
+    Artisan::call('cache:clear');
+    return response()->json(['message' => 'Application optimized and cache cleared!']);
+});
 
 Route::middleware(['guest','api'])->group(function () {
 
