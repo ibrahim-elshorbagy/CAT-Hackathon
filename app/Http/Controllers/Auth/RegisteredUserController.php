@@ -74,7 +74,7 @@ class RegisteredUserController extends Controller
      */
     public function verifySMS($phone, $code)
     {
-        $basic = new \Vonage\Client\Credentials\Basic('c6203c09', 'sLLL7LM5ht0CysQH');
+        $basic = new \Vonage\Client\Credentials\Basic(env('VONAGE_KEY'), env('VONAGE_SECRET'));
 
         $client = new \Vonage\Client($basic);
 

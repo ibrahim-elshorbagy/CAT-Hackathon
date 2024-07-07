@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'google' => [
+        'web' => [
+            'client_id' => env('GOOGLE_CLIENT_ID_WEB'),
+            'client_secret' => env('GOOGLE_CLIENT_SECRET_WEB'),
+            'redirect' => env('GOOGLE_REDIRECT_URI_WEB'),
+        ],
+        'mobile' => [
+            'client_id' => env('GOOGLE_CLIENT_ID_MOBILE'),
+            'client_secret' => env('GOOGLE_CLIENT_SECRET_MOBILE'),
+            'redirect' => env('GOOGLE_REDIRECT_URI_MOBILE'),
+        ],
+    ],
+
 ];

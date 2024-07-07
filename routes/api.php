@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
 
 Route::middleware(['guest','api'])->group(function () {
 
@@ -21,6 +21,8 @@ Route::middleware(['guest','api'])->group(function () {
     Route::post('/verify-reset-code', [PasswordForgotController::class, 'verifyResetCode']);
     Route::post('/forgot-reset-password', [PasswordForgotController::class, 'resetPassword']);
 
+    Route::get('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
+    Route::get('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
     // Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
     // Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 

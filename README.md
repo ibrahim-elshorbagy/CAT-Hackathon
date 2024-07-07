@@ -2,23 +2,25 @@
 
 ## Guest Routes
 
-| URL                        | Accepts                            |
-|----------------------------|------------------------------------|
-| `/api/register`            | `name`, `phone`, `password`        |
-| `/api/verify`              | `phone`, `code`                    |
-| `/api/resend-code`         | `phone`                            |
-| `/api/login`               | `phone`, `password`                |
-| `/api/forgot-password`     | `phone`                            |
-| `/api/forgot-password-resend-code` | `phone`                            |
-| `/api/verify-reset-code`   | `phone`, `ForgetPasswordCode`      |
-| `/api/forgot-reset-password` | `phone`, `ForgetPasswordCode`, `password` |
+| Type  | URL                        | Accepts                            |
+|-------|----------------------------|------------------------------------|
+| POST  | `/api/register`            | `name`, `phone`, `password`        |
+| POST  | `/api/verify`              | `phone`, `code`                    |
+| POST  | `/api/resend-code`         | `phone`                            |
+| POST  | `/api/login`               | `phone`, `password`                |
+| POST  | `/api/forgot-password`     | `phone`                            |
+| POST  | `/api/forgot-password-resend-code` | `phone`                            |
+| POST  | `/api/verify-reset-code`   | `phone`, `ForgetPasswordCode`      |
+| POST  | `/api/forgot-reset-password` | `phone`, `ForgetPasswordCode`, `password` |
+| GET  | `/api/login-with-google` | - |
+| GET  | `/api/google-callback` | - |
 
 ## Auth Routes
 remeber to use Token here
-| URL           | Accepts            |
-|---------------|--------------------|
-| `/api/logout` | -                  |
-| `/api/testo`  | -                  |
+| Type  | URL           | Accepts            |
+|-------|---------------|--------------------|
+| POST  | `/api/logout` | -                  |
+| POST  | `/api/testo`  | -                  |
 
 
 ## Features

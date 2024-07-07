@@ -26,6 +26,7 @@ class User extends Authenticatable
         'code',
         'expire_at',
         'ForgetPasswordCode',
+        'google_id',
     ];
 
     /**
@@ -58,7 +59,7 @@ class User extends Authenticatable
         $this->expire_at = now()->addMinutes(60);
         $this->save();
     }
-    
+
     public function generateForgetPasswordCode()
     {
         $this->ForgetPasswordCode = rand(1000, 9999);
