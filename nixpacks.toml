@@ -1,0 +1,19 @@
+[phases.setup]
+commands = [
+    "composer install",
+    "php artisan key:generate",
+    "php artisan optimize:clear",
+    "php artisan storage:link",
+    "php artisan migrate --force"
+    "php artisan migrate"
+]
+
+[phases.build]
+commands = [
+    "echo Build phase"
+]
+
+[phases.start]
+commands = [
+    "php artisan serve --host=0.0.0.0 --port=$PORT"
+]
