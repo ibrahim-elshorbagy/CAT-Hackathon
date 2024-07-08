@@ -22,7 +22,9 @@ Route::get('/opt', function () {
     Artisan::call('cache:clear');
     return response()->json(['message' => 'Application optimized and cache cleared!']);
 });
-
+Route::get('/debug', function (\Illuminate\Http\Request $request) {
+    return response()->json(['message' => 'Request logged']);
+});
 Route::middleware(['guest','api'])->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
