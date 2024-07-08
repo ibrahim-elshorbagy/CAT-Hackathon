@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/opt', function () {
     Artisan::call('optimize:clear');
@@ -22,8 +23,14 @@ Route::get('/opt', function () {
     Artisan::call('cache:clear');
     return response()->json(['message' => 'Application optimized and cache cleared!']);
 });
-Route::get('/debug', function (\Illuminate\Http\Request $request) {
-    return response()->json(['message' => 'Request logged']);
+Route::get('/debug', function (Request $request) {
+    Log::info('GET Debug Request', ['request' => $request->all()]);
+    return response()->json(['message' => 'GET Request logged']);
+});
+
+Route::post('/debug', function (Request $request) {
+    Log::info('POST Debug Request', ['request' => $request->all()]);
+    return response()->json(['message' => 'POST Request logged', 'data' => $request->all()]);
 });
 Route::middleware(['guest','api'])->group(function () {
 
