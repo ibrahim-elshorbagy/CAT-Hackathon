@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
+use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -15,36 +16,42 @@ use Illuminate\Support\Facades\Log;
 
 Route::middleware(['guest','api'])->group(function () {
 
+    // Register Routes
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
     Route::post('/verify', [RegisteredUserController::class, 'verify']);
     Route::post('/resend-code', [RegisteredUserController::class, 'resendCode']);
 
+    // Login Routes
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
+    // Forgot Password Routes
     Route::post('/forgot-password', [PasswordForgotController::class, 'sendResetCode']);
     Route::post('/forgot-password-resend-code', [PasswordForgotController::class, 'resendCode']);
     Route::post('/verify-reset-code', [PasswordForgotController::class, 'verifyResetCode']);
     Route::post('/forgot-reset-password', [PasswordForgotController::class, 'resetPassword']);
 
+    // Login with Google
     Route::get('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
     Route::get('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
-    // Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-    // Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
+    //Show Company
+    Route::get('/companies/{company}/info',[CompanyController::class,'show']);
+    Route::get('/companies',[CompanyController::class,'index']);
 });
+
+//----------------------------------------------------------------------------------//
 
 Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
 
+    // Logout Routes
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    // Profile Routes
     Route::put('/change-password',[ProfileController::class,'updatePassword']);
     Route::put('/change-image',[ProfileController::class,'ChangeImage']);
     Route::put('/change-name',[ProfileController::class,'ChangeName']);
 
-    // Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-    //                 ->middleware(['signed', 'throttle:6,1'])
-    //                 ->name('verification.verify');
+    // Company Routes
+    Route::apiResource('/company',CompanyController::class)->except(['show','index']);
 
-    // Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    //             ->middleware(['throttle:6,1'])
-    //             ->name('verification.send');
 });

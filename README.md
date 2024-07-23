@@ -15,7 +15,7 @@
 | GET  | `/api/login-with-google` | - |
 | GET  | `/api/google-callback` | - |
 
-## Auth Routes
+## Auth Routes API Endpoints
 Remeber To Use Token here
 
 | Type  | URL           | Accepts            |
@@ -23,12 +23,24 @@ Remeber To Use Token here
 | POST  | `/api/logout` | -                  |
 
 
-# Profile
+# Profile API Endpoints
 | Type  | URL           | Accepts            |
 |-------|---------------|--------------------|
 | PUT  | `/api/change-password` | `password`,`password_confirmation`|
 | PUT  | `/api/change-image` | `image`|
 | PUT  | `/api/change-name` | `name`|
+
+
+
+# Company API Endpoints
+
+| Method      | URL                          | Controller Action     | Accepts                |
+|-------------|------------------------------|-----------------------|------------------------|
+| GET         | /api/companies               | Indexing Companies    |                        |
+| POST        | /api/company                 | Create A Company      | `id of the company write on {company}`  `name`, `email` (nullable), `phone` (nullable), `address` (nullable), `website` (nullable), `description` (nullable), `industry` (nullable), `logo` (nullable) |
+| GET         | /api/companies/{company}/info| Show A Company        |                        |
+| PUT         | /api/company/{company}       | Update A Company `id of the company write on {company}`   `You must send all data even there is no change on it`    | `name`, `email` (nullable), `phone` (nullable), `address` (nullable), `website` (nullable), `description` (nullable), `industry` (nullable), `logo` (nullable) |
+| DELETE      | /api/company/{company}       | Delete A Company      |   `id of the company write on {company}`                     |
 
 
 
