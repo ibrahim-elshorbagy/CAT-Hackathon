@@ -12,6 +12,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 
 class RegisteredUserController extends Controller
 {
@@ -21,6 +22,7 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
 
+
     public function store(Request $request)
     {
         try {
@@ -29,7 +31,7 @@ class RegisteredUserController extends Controller
             $validateUser = Validator::make($request->all(), [
                 'name' => ['required', 'string', 'max:255'],
                 'phone' => ['required', 'string', 'max:15', 'unique:users', 'regex:/^[0-9]{10,15}$/'],
-                'password' => ['required', Rules\Password::defaults()],
+                'password' => ['required', Rules\Password::defaults(), 'confirmed'],
             ]);
 
             if ($validateUser->fails()) {

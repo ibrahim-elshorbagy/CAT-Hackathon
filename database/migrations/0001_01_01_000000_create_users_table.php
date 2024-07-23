@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('ForgetPasswordCode')->nullable();
             $table->rememberToken();
             $table->string('google_id')->nullable();
+            $table->string('role')->default('user');
+            $table->string('image_link')->nullable();
+            $table->string('cv_link')->nullable();
             $table->timestamps();
         });
 

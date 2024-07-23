@@ -4,7 +4,7 @@
 
 | Type  | URL                        | Accepts                            |
 |-------|----------------------------|------------------------------------|
-| POST  | `/api/register`            | `name`, `phone`, `password`        |
+| POST  | `/api/register`            | `name`, `phone`,`password`,`password_confirmation`       |
 | POST  | `/api/verify`              | `phone`, `code`                    |
 | POST  | `/api/resend-code`         | `phone`                            |
 | POST  | `/api/login`               | `phone`, `password`                |
@@ -16,11 +16,20 @@
 | GET  | `/api/google-callback` | - |
 
 ## Auth Routes
-remeber to use Token here
+Remeber To Use Token here
+
 | Type  | URL           | Accepts            |
 |-------|---------------|--------------------|
 | POST  | `/api/logout` | -                  |
-| POST  | `/api/testo`  | -                  |
+
+
+# Profile
+| Type  | URL           | Accepts            |
+|-------|---------------|--------------------|
+| PUT  | `/api/change-password` | `password`,`password_confirmation`|
+| PUT  | `/api/change-image` | `image`|
+| PUT  | `/api/change-name` | `name`|
+
 
 
 ## Features

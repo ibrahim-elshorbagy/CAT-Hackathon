@@ -7,31 +7,12 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
-Route::get('/opt', function () {
-    Artisan::call('optimize:clear');
-    Artisan::call('config:cache');
-    Artisan::call('route:cache');
-    Artisan::call('view:cache');
-    Artisan::call('event:cache');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    Artisan::call('event:clear');
-    Artisan::call('cache:clear');
-    return response()->json(['message' => 'Application optimized and cache cleared!']);
-});
-Route::get('/debug', function (Request $request) {
-    Log::info('GET Debug Request', ['request' => $request->all()]);
-    return response()->json(['message' => 'GET Request logged']);
-});
 
-Route::post('/debug', function (Request $request) {
-    Log::info('POST Debug Request', ['request' => $request->all()]);
-    return response()->json(['message' => 'POST Request logged', 'data' => $request->all()]);
-});
+
 Route::middleware(['guest','api'])->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
@@ -55,10 +36,10 @@ Route::middleware(['guest','api'])->group(function () {
 Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::get('testo',function(){
-       return response()->json(['message' => 'hello']);
+    Route::put('/change-password',[ProfileController::class,'updatePassword']);
+    Route::put('/change-image',[ProfileController::class,'ChangeImage']);
+    Route::put('/change-name',[ProfileController::class,'ChangeName']);
 
-    });
     // Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
     //                 ->middleware(['signed', 'throttle:6,1'])
     //                 ->name('verification.verify');
