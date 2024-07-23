@@ -24,6 +24,7 @@ class CompanyController extends Controller
         ]);
     }
 
+
     public function store(Request  $request)
     {
             $validateData = Validator::make($request->all(), [
@@ -34,7 +35,8 @@ class CompanyController extends Controller
                 'website' => ['nullable', 'url'],
                 'description' => ['nullable', 'string'],
                 'industry' => ['nullable', 'string', 'max:255'],
-                'logo' => ['nullable', 'string'],]);
+                'logo' => ['nullable', 'string'],
+            ]);
 
             if ($validateData->fails()) {
                 return response()->json([
@@ -46,25 +48,31 @@ class CompanyController extends Controller
 
         $data = $request->all();
 
+        $company = Company::create($data);
         // Store the new image
+        if ($request->hasFile('logo'))
+        {
+
         $logo = $request->file('logo');
-        if ($logo) {
-            $path = $logo->store('company' . $data['id'] . '/logo', 'public');
-            $data['logo'] = $path;
+
+            $path = $logo->store('company' . $company['id'] . '/logo', 'public');
+
+            $company->update([
+            'logo' => $path,
+            ]);
         }
 
 
-        Company::create($data);
+
+
 
     return response()->json([
             'message' => 'Company created successfully',
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-      public function show($id)
+
+    public function show($id)
     {
         $company = Company::find($id);
 
@@ -101,19 +109,19 @@ class CompanyController extends Controller
 
         $data = $request->all();
         // Delete the old image if it exists
-        if ($data['logo'] != null) {
+        if ($request->hasFile('logo')) {
             Storage::disk('public')->delete($data['logo']);
         }
 
         // Store the new image
-        $logo = $request->file('logo');
-        if ($logo) {
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
             $path = $logo->store('company' . $id . '/logo', 'public');
             $data['logo'] = $path;
         }
 
-
-        Company::create($data);
+        $company =Company::find($id);
+        $company->update($data);
 
     return response()->json([
             'message' => 'Company Edit successfully',

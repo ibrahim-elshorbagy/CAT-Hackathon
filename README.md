@@ -37,10 +37,20 @@ Remeber To Use Token here
 | Method      | URL                          | Controller Action     | Accepts                |
 |-------------|------------------------------|-----------------------|------------------------|
 | GET         | /api/companies               | Indexing Companies    |                        |
-| POST        | /api/company                 | Create A Company      | `id of the company write on {company}`  `name`, `email` (nullable), `phone` (nullable), `address` (nullable), `website` (nullable), `description` (nullable), `industry` (nullable), `logo` (nullable) |
 | GET         | /api/companies/{company}/info| Show A Company        |                        |
+| POST        | /api/company                 | Create A Company      | `id of the company write on {company}`  `name`, `email` (nullable), `phone` (nullable), `address` (nullable), `website` (nullable), `description` (nullable), `industry` (nullable), `logo` (nullable) |
 | PUT         | /api/company/{company}       | Update A Company `id of the company write on {company}`   `You must send all data even there is no change on it`    | `name`, `email` (nullable), `phone` (nullable), `address` (nullable), `website` (nullable), `description` (nullable), `industry` (nullable), `logo` (nullable) |
-| DELETE      | /api/company/{company}       | Delete A Company      |   `id of the company write on {company}`                     |
+| DELETE      | /api/company/{company}       | Delete A Company      |   `id of the company write on {company}`       
+
+# Jobs API Endpoints
+| Method      | URL                          | Controller Action     | Accepts                |
+|-------------|------------------------------|-----------------------|------------------------|
+| GET         | /api/jobs                    | Indexing jobs         |                        |
+| GET         | /api/jobs/{job}/info         | Show A Job            |    `id  of the job`                      |
+| GET         | /api/companies/{companyId}/jobs| Show one of company's Jobs |   `id  of the company`                     |
+| POST        | /api/job                     | Create A Job          | `name`, `description` (nullable), `company_id`, `contact_email` (nullable), `contact_phone` (nullable), `logo` (nullable), `field` (nullable) |
+| PUT         | /api/job/{job}               | Update A Job          | `id  of the job`,`name`, `description` (nullable), `company_id`, `contact_email` (nullable), `contact_phone` (nullable), `logo` (nullable), `field` (nullable) |
+| DELETE      | /api/job/{job}               | Delete A Job          | `id  of the job`                      |
 
 
 

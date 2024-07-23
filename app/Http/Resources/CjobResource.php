@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
-class CompanyResource extends JsonResource
+class CjobResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,21 +17,15 @@ class CompanyResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'email' => $this->email,
             'name' => $this->name,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'website' => $this->website,
             'description' => $this->description,
-            'industry' => $this->industry,
-            'academic_year' => $this->academic_year,
+            'company_id' => $this->company_id,
+            'contact_email' => $this->contact_email,
+            'contact_phone' => $this->contact_phone,
             'logo' => $this->logo && !(str_starts_with($this->logo, 'http')) ?
                 Storage::url($this->logo) : $this->logo,
-            'created_at' => (new Carbon($this->created_at))->format('Y-m-d'),
-            'updated_at' => (new Carbon($this->updated_at))->format('Y-m-d'),
+            'field' => $this->field,
 
         ];
-
     }
 }

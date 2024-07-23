@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\PasswordForgotController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
 use App\Http\Controllers\Company\CompanyController;
+use App\Http\Controllers\Company\Job\CjobController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -37,6 +38,12 @@ Route::middleware(['guest','api'])->group(function () {
     //Show Company
     Route::get('/companies/{company}/info',[CompanyController::class,'show']);
     Route::get('/companies',[CompanyController::class,'index']);
+
+    //Show Job
+    Route::get('/jobs/{job}/info',[CjobController::class,'show']);
+    Route::get('/jobs',[CjobController::class,'index']);
+    Route::get('/companies/{companyId}/jobs',[CjobController::class,'companyJobs']);
+
 });
 
 //----------------------------------------------------------------------------------//
@@ -54,4 +61,6 @@ Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
     // Company Routes
     Route::apiResource('/company',CompanyController::class)->except(['show','index']);
 
+    //Job Routes
+    Route::apiResource('/job',CjobController::class)->except(['show','index']);
 });
