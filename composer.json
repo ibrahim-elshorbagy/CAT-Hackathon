@@ -11,6 +11,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
+        "spatie/laravel-permission": "^6.9",
         "vonage/client": "^4.0"
     },
     "require-dev": {

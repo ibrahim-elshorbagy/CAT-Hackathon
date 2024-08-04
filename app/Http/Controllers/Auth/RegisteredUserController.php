@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserProfileResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,7 +134,7 @@ class RegisteredUserController extends Controller
         'status' => true,
         'message' => 'Phone number verified successfully.',
         'token' => $user->createToken("API TOKEN")->plainTextToken,
-        'user' => $user,
+        'user' =>new UserProfileResource($user),
     ], 200);
 
     }

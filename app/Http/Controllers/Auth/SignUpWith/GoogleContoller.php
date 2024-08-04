@@ -37,23 +37,38 @@ class GoogleContoller extends Controller
             $platform = $request->query('platform', 'web');
             $this->configureGoogleDriver($platform);
 
-            $user = Socialite::driver('google')->stateless()->user();
+            $socialiteUser = Socialite::driver('google')->stateless()->user();
 
-            $googleUser = User::where('google_id', $user->id)->first();
+            $existingUser = User::where('email', $socialiteUser->email)->first();
 
-            if ($googleUser) {
-                Auth::login($googleUser);
-                $token = $googleUser->createToken('GoogleAuthToken')->accessToken;
-                return response()->json([
+
+                if ($existingUser) {
+                if (is_null($existingUser->google_id)) {
+                    $existingUser->google_id = $socialiteUser->id;
+                    $existingUser->save();
+                }
+
+                Auth::login($existingUser);
+                $tokenResult = $existingUser->createToken('GoogleAuthToken');
+                $token = $tokenResult->plainTextToken;
+
+                $roles = $existingUser->roles->pluck('name')->toArray();
+
+            return response()->json([
                     'status' => true,
                     'message' => 'Login successfully.',
-                    'token' => $token
+                    'token' => $token,
+                    'user' => [
+                    'id' => $existingUser->id,
+                    'name' => $existingUser->name,
+                    'email' => $existingUser->email,
+                ]
                 ], 200);
-            } else {
+            }else {
                 $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'google_id' => $user->id,
+                    'name' => $socialiteUser->name,
+                    'email' => $socialiteUser->email,
+                    'google_id' => $socialiteUser->id,
                     'password' => Hash::make('1231@#165E!#!#@$1625essful!@$16my')
                 ]);
 
@@ -63,10 +78,15 @@ class GoogleContoller extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'Registered successfully.',
-                    'token' => $token
+                    'token' => $token,
+                     'user' => [
+                    'id' => $newUser->id,
+                    'name' => $newUser->name,
+                    'email' => $newUser->email,
+                ]
                 ], 200);
             }
-        } catch (\Throwable $th) {
+        }  catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage(),

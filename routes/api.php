@@ -32,8 +32,8 @@ Route::middleware(['guest','api'])->group(function () {
     Route::post('/forgot-reset-password', [PasswordForgotController::class, 'resetPassword']);
 
     // Login with Google
-    Route::get('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
-    Route::get('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
+    Route::post('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
+    Route::post('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
 
     //Show Company
     Route::get('/companies/{company}/info',[CompanyController::class,'show']);
@@ -46,7 +46,7 @@ Route::middleware(['guest','api'])->group(function () {
 
 });
 
-//----------------------------------------------------------------------------------//
+//------------------------------------Auth User----------------------------------------//
 
 Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
 
@@ -58,9 +58,14 @@ Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
     Route::put('/change-image',[ProfileController::class,'ChangeImage']);
     Route::put('/change-name',[ProfileController::class,'ChangeName']);
 
+});
+
+//----------------------------------Admin Dashbaord --------------------------------------------//
+Route::middleware(['auth:sanctum','role:user'])->group(function () {
     // Company Routes
     Route::apiResource('/company',CompanyController::class)->except(['show','index']);
 
     //Job Routes
     Route::apiResource('/job',CjobController::class)->except(['show','index']);
+
 });

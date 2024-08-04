@@ -16,7 +16,6 @@
 | GET  | `/api/google-callback` | - |
 
 ## Auth Routes API Endpoints
-Remeber To Use Token here
 
 | Type  | URL           | Accepts            |
 |-------|---------------|--------------------|
@@ -24,6 +23,8 @@ Remeber To Use Token here
 
 
 # Profile API Endpoints
+Remeber To Use Token here
+
 | Type  | URL           | Accepts            |
 |-------|---------------|--------------------|
 | PUT  | `/api/change-password` | `password`,`password_confirmation`|
@@ -60,8 +61,11 @@ Remeber To Use Token here
 - Phone number verification via SMS
 - Password reset functionality with verification code
 - Token-based authentication using Laravel Sanctum
+- Company Full CRUD API
+- Company's Jobs Full CRUD API
+- Roles : Admin,user,mentor
 
-## Libraries Used
+## With
 - Laravel 11
 
 
