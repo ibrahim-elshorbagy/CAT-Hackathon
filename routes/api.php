@@ -33,8 +33,8 @@ Route::middleware(['guest','api'])->group(function () {
     Route::post('/forgot-reset-password', [PasswordForgotController::class, 'resetPassword']);
 
     // Login with Google
-    Route::post('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
-    Route::post('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
+    Route::get('/login-with-google',[GoogleContoller::class, 'redirectToGoogle']);
+    Route::get('/google-callback',[GoogleContoller::class, 'handleGoogleCallback']);
 
     //Show Company
     Route::get('/companies/{company}/info',[CompanyController::class,'show']);
