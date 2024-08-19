@@ -106,6 +106,4 @@ Remeber To Use Token here
     ```
     php artisan serve
     ```
-    ```
-    npm run dev
-    ```
+

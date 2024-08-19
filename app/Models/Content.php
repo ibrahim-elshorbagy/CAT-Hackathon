@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Content extends Model
 {
     use HasFactory;
+    
+    public $timestamps = false;
     protected $guarded=[];
 
-    public function cjobs()
-    {
-        return $this->hasMany(Cjob::class);
-    }
+
 }
