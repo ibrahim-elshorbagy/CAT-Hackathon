@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RoadmapContentSeeder::class);
+        $this->call(CompanySeeder::class);
 
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'mentor']);
