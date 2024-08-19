@@ -45,6 +45,10 @@ Route::middleware(['guest','api'])->group(function () {
     Route::get('/jobs',[CjobController::class,'index']);
     Route::get('/companies/{companyId}/jobs',[CjobController::class,'companyJobs']);
 
+        Route::get('/roadmaps', [RoadmapScheduleController::class, 'getAllRoadmaps']);
+    Route::get('/roadmaps/{roadmapId}/contents', [RoadmapScheduleController::class, 'getRoadmapContents']);
+
+
 });
 
 //------------------------------------Auth User----------------------------------------//
@@ -59,8 +63,6 @@ Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
     Route::put('/change-image',[ProfileController::class,'ChangeImage']);
     Route::put('/change-name',[ProfileController::class,'ChangeName']);
 
-    Route::get('/roadmaps', [RoadmapScheduleController::class, 'getAllRoadmaps']);
-    Route::get('/roadmaps/{roadmapId}/contents', [RoadmapScheduleController::class, 'getRoadmapContents']);
 
     Route::post('/create-schedule', [RoadmapScheduleController::class, 'createSchedule']);
     Route::get('/my-schedule', [RoadmapScheduleController::class, 'getSchedule']);
