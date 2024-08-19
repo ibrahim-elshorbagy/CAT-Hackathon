@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SignUpWith\GoogleContoller;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Company\Job\CjobController;
+use App\Http\Controllers\RoadmapScheduleController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -57,6 +58,13 @@ Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
     Route::put('/change-password',[ProfileController::class,'updatePassword']);
     Route::put('/change-image',[ProfileController::class,'ChangeImage']);
     Route::put('/change-name',[ProfileController::class,'ChangeName']);
+
+    Route::get('/roadmaps', [RoadmapScheduleController::class, 'getAllRoadmaps']);
+    Route::get('/roadmaps/{roadmapId}/contents', [RoadmapScheduleController::class, 'getRoadmapContents']);
+
+    Route::post('/create-schedule', [RoadmapScheduleController::class, 'createSchedule']);
+    Route::get('/my-schedule', [RoadmapScheduleController::class, 'getSchedule']);
+
 
 });
 

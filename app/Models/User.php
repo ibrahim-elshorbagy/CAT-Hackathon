@@ -68,4 +68,9 @@ class User extends Authenticatable
         $this->ForgetPasswordCode = 1234;                           //delete on production
         $this->save();
     }
+
+    public function schedule()
+{
+    return $this->hasOne(UserSchedule::class);
+}
 }

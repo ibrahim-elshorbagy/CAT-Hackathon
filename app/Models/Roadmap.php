@@ -13,4 +13,9 @@ class Roadmap extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function contents()
+    {
+        return $this->belongsToMany(Content::class, 'roadmap_contents', 'roadmap_id', 'content_id');
+    }
 }
