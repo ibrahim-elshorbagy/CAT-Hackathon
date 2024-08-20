@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CjobResource;
 use App\Models\Company;
 use App\Http\Resources\CompanyResource;
+use App\Models\Cjob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -76,8 +78,13 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
 
+        $query = Cjob::query()->where('company_id', $id);
+        $jobs = $query->paginate(10)->onEachSide(1);
+
         return response()->json([
             'company' =>new CompanyResource($company),
+            'jobs' => CjobResource::collection($jobs),
+
         ]);
     }
 

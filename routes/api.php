@@ -45,7 +45,7 @@ Route::middleware(['guest','api'])->group(function () {
     Route::get('/jobs',[CjobController::class,'index']);
     Route::get('/companies/{companyId}/jobs',[CjobController::class,'companyJobs']);
 
-        Route::get('/roadmaps', [RoadmapScheduleController::class, 'getAllRoadmaps']);
+    Route::get('/roadmaps', [RoadmapScheduleController::class, 'getAllRoadmaps']);
     Route::get('/roadmaps/{roadmapId}/contents', [RoadmapScheduleController::class, 'getRoadmapContents']);
 
 
