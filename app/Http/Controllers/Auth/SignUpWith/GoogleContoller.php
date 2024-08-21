@@ -58,6 +58,7 @@ class GoogleContoller extends Controller
                     'status' => true,
                     'message' => 'Login successfully.',
                     'token' => $token,
+                    'roles' => $roles,
                     'user' => [
                     'id' => $existingUser->id,
                     'name' => $existingUser->name,
@@ -73,13 +74,17 @@ class GoogleContoller extends Controller
                 ]);
 
                 Auth::login($newUser);
+                $newUser->assignRole('user');
+                $roles = $newUser->roles->pluck('name')->toArray();
+
                 $token = $newUser->createToken('GoogleAuthToken')->accessToken;
 
                 return response()->json([
                     'status' => true,
                     'message' => 'Registered successfully.',
+                    'roles' => $roles,
                     'token' => $token,
-                     'user' => [
+                    'user' => [
                     'id' => $newUser->id,
                     'name' => $newUser->name,
                     'email' => $newUser->email,

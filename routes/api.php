@@ -25,6 +25,7 @@ Route::middleware(['guest','api'])->group(function () {
 
     // Login Routes
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+    Route::post('/admin/login', [AuthenticatedSessionController::class, 'store']);
 
     // Forgot Password Routes
     Route::post('/forgot-password', [PasswordForgotController::class, 'sendResetCode']);

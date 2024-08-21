@@ -42,6 +42,7 @@ class AuthenticatedSessionController extends Controller
 
             return response()->json([
                 'user' => new UserProfileResource($user),
+                'roles'=>$user->roles->pluck('name')->toArray(),
                 'access_token' => $plainTextToken,
                 'token_type' => 'Bearer',
             ]);
