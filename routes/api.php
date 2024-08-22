@@ -11,6 +11,7 @@ use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Company\Job\CjobController;
 use App\Http\Controllers\RoadmapScheduleController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\UserCRUDController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
@@ -72,11 +73,16 @@ Route::middleware(['PhoneVerified','auth:sanctum'])->group(function () {
 });
 
 //----------------------------------Admin Dashbaord --------------------------------------------//
-Route::middleware(['auth:sanctum','role:user'])->group(function () {
+Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     // Company Routes
     Route::apiResource('/company',CompanyController::class)->except(['show','index']);
 
     //Job Routes
     Route::apiResource('/job',CjobController::class)->except(['show','index']);
+
+    Route::get('/admin/get-all-users',[UserCRUDController::class,'getUsers']);
+    Route::get('/admin/get-all-admins',[UserCRUDController::class,'getAdmins']);
+    Route::post('/admin/create-user',[UserCRUDController::class,'createUser']);
+    Route::post('/admin/delete-user/{id}',[UserCRUDController::class,'destroy']);
 
 });
