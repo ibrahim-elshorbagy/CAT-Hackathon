@@ -78,6 +78,12 @@ class RoadmapScheduleController extends Controller
             ->get()
             ->groupBy('roadmap.name');
 
+            if ($schedule->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User does not have a schedule',
+            ], 404);
+        }
         return response()->json($schedule);
     }
 
@@ -91,7 +97,6 @@ class RoadmapScheduleController extends Controller
     public function getRoadmapContents($roadmapId)
     {
         $roadmap = Roadmap::with('contents')->find($roadmapId);
-
         if (!$roadmap) {
             return response()->json([
                 'status' => false,
