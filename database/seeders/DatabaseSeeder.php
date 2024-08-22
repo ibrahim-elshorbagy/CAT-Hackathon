@@ -25,17 +25,17 @@ class DatabaseSeeder extends Seeder
 
 
 
-        //  User::factory(10)->create()->each(function ($user) {
+         User::factory(10)->create()->each(function ($user) {
 
-        //     $user->assignRole('user');
+            $user->assignRole('user');
 
-        // });
+        });
 
-        // User::factory(10)->create()->each(function ($user) {
+        User::factory(10)->create()->each(function ($user) {
 
-        //     $user->assignRole('admin');
+            $user->assignRole('admin');
 
-        // });
+        });
         $user =User::create([
 
             'name' => 'Admin',
