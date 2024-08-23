@@ -53,6 +53,26 @@ Remeber To Use Token here
 | PUT         | /api/job/{job}               | Update A Job          | `id  of the job`,`name`, `description` (nullable), `company_id`, `contact_email` (nullable), `contact_phone` (nullable), `logo` (nullable), `field` (nullable) |
 | DELETE      | /api/job/{job}               | Delete A Job          | `id  of the job`                      |
 
+# Roadmap API Endpoints
+| Method      | URL                          | Controller Action     | Accepts                |
+|-------------|------------------------------|-----------------------|------------------------|
+| GET         | /api/roadmaps| get all roadmaps |                       |
+| POST        | /api/roadmaps/{roadmapId}/contents | get a roadmap content          | `id of roadmap`|
+| POST         | /api/create-schedule                    | create schedule for user        |  `id of roadmap`       |
+| GET         | /api/my-schedule         | get the user schedule            |                          |
+
+
+# Admin Dashbaord API Endpoints
+| Method      | URL                          | Controller Action     | Accepts                |
+|-------------|------------------------------|-----------------------|------------------------|
+| POST         | /api/admin/login                    | Login         |  `phone`,`password`       |
+| GET         | /api/admin/get-all-users         | get all users            |                          |
+| GET         | /api/admin/get-all-admins| get all admins |   `id  of the company`                     |
+| POST        | /api/admin/create-user | Create A user          | `name`, `phone`, `password`, `email` (nullable), `role`|
+| POST      | /api/admin/delete-user/{id}              | Delete A User          | `id  of the User`                      |
+
+
+
 
 
 ## Features
@@ -64,6 +84,8 @@ Remeber To Use Token here
 - Company Full CRUD API
 - Company's Jobs Full CRUD API
 - Roles : Admin,user,mentor
+- Roadmap System
+- every user has his schedule
 
 ## With
 - Laravel 11
@@ -72,7 +94,7 @@ Remeber To Use Token here
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/ibrahim-elshorbagy/CAT-Hackathon.git
+   git clone https://github.com/CAT-Hackathon/Backend.git
    
    cd CAT-Hackathon
    ```
