@@ -90,7 +90,17 @@ Remeber To Use Token here
 ## With
 - Laravel 11
 
-
+## Accounts
+- Admin
+  ```
+  phone `010123456789`
+  password `A2padffdssword`
+  ```
+- user
+  ```
+  phone `010147258369`
+  password `A2padffdssword`
+  ```
 ## Installation
 1. Clone the repository:
    ```
