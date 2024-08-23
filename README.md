@@ -123,6 +123,19 @@ Remeber To Use Token here
     VONAGE_KEY=
     VONAGE_SECRET=
     ```
+    ```
+
+    # Web Application
+    GOOGLE_CLIENT_ID_WEB= 
+    GOOGLE_CLIENT_SECRET_WEB= 
+    ```
+    ```
+    # Mobile Application
+    GOOGLE_CLIENT_ID_MOBILE= 
+    GOOGLE_CLIENT_SECRET_MOBILE= 
+    GOOGLE_REDIRECT_URI_WEB= 
+    ```
+
 7. Start The Server
 
     ```
