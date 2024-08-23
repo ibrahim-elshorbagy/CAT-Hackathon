@@ -50,6 +50,8 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+            $user->assignRole('user');
+
             $user->generateRegisterCode();
 
             //$this->verifySMS($user->phone, $user->code); //-------------------------------------------------> uncomment this line to start send SMS verification code
@@ -135,6 +137,7 @@ class RegisteredUserController extends Controller
         'message' => 'Phone number verified successfully.',
         'token' => $user->createToken("API TOKEN")->plainTextToken,
         'user' =>new UserProfileResource($user),
+        'roles'=>$user->roles->pluck('name')->toArray(),
     ], 200);
 
     }
