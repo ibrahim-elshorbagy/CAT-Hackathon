@@ -77,15 +77,41 @@ Remeber To Use Token here
 
 ## Features
 
-- Full authentication system with mobile registration
-- Phone number verification via SMS
-- Password reset functionality with verification code
-- Token-based authentication using Laravel Sanctum
-- Company Full CRUD API
-- Company's Jobs Full CRUD API
-- Roles : Admin,user,mentor
-- Roadmap System
-- every user has his schedule
+### 1. Full Authentication System with Mobile Registration
+Users can register using their mobile phone numbers instead of email addresses.
+SMS verification is required to activate the account, ensuring user identity and reducing the chance of fraudulent registrations.
+### 2. Phone Number Verification via SMS
+An SMS with a verification code is sent to the user's phone number during the registration process.
+Users must input the code to complete their registration and verify their phone number.
+### 3. Password Reset Functionality with Verification Code
+If a user forgets their password, they can initiate a password reset request.
+A password reset code is sent via SMS to the registered phone number.
+Users must enter the verification code to reset their password.
+### 4. Token-Based Authentication using Laravel Sanctum
+Laravel Sanctum will be used for API authentication.
+Each authenticated user session will generate a token that the user will need to pass in subsequent requests for protected routes.
+Sanctum provides API token management, ensuring secure access to user data and actions.
+### 5. Company Full CRUD API
+Create, Read, Update, and Delete functionality for company profiles.
+Users with the appropriate roles (such as Admin) can create new companies, update existing ones, or delete them from the system.
+The API allows for dynamic filtering, sorting, and pagination of company records.
+### 6. Company's Jobs Full CRUD API
+Full CRUD for managing job postings related to companies.
+Jobs can be created, listed, updated, and deleted through the API.
+
+### 7. Roles: Admin, User, Mentor
+Admin: Full access to manage users, companies, jobs, and system configurations.
+Mentor: with the ability to mentor users or offer guidance.
+User:manage their personal profiles, and follow roadmaps based on assigned schedules.
+Role-based access control (RBAC) is enforced using Spatie's Laravel-Permission package.
+
+### 8. Roadmap System
+Each user has a personalized roadmap that guides their learning or work progression.
+Roadmaps can include milestones, tasks, and deadlines for users to follow.
+
+### 9. Every User Has Their Schedule
+Each user can have a customized schedule.
+Users can view and manage their schedule from their dashboard
 
 ## With
 - Laravel 11
