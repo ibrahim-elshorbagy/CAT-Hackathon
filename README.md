@@ -119,12 +119,12 @@ Users can view and manage their schedule from their dashboard
 ## Accounts
 - Admin
   ```
-  phone `010123456789`
+  phone `01012345678`
   password `A2padf##fd##ssword`
   ```
 - user
   ```
-  phone `010147258369`
+  phone `01014725836`
   password `A2padf##fd##ssword`
   ```
 ## Installation
