@@ -120,12 +120,12 @@ Users can view and manage their schedule from their dashboard
 - Admin
   ```
   phone `010123456789`
-  password `A2padffdssword`
+  password `A2padf##fd##ssword`
   ```
 - user
   ```
   phone `010147258369`
-  password `A2padffdssword`
+  password `A2padf##fd##ssword`
   ```
 ## Installation
 1. Clone the repository:
